@@ -1,4 +1,4 @@
-# 🛡️ Secure Coding Dojo - Plataforma Educativa Interactiva
+# 🛡️ Plataforma Educativa Interactiva
 
 Una plataforma educativa moderna y completamente interactiva para aprender ciberseguridad y seguridad en la codificación mediante ejercicios prácticos, desafíos y lecciones basadas en vulnerabilidades reales del mundo.
 
