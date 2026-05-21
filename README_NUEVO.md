@@ -1,6 +1,6 @@
-# 🛡️ Secure Coding Dojo - Plataforma Educativa Interactiva v2.0
+# 🛡️ HackProof - Plataforma Educativa Interactiva v2.0
 
-Una plataforma moderna y completamente funcional para aprender **ciberseguridad y seguridad en la codificación** mediante ejercicios prácticos, simuladores de ataques y explicaciones detalladas. Replicando la metodología educativa de Secure Coding Dojo con un enfoque completamente interactivo.
+Una plataforma moderna y completamente funcional para aprender **ciberseguridad y seguridad en la codificación** mediante ejercicios prácticos, simuladores de ataques y explicaciones detalladas. Replicando la metodología educativa de HackProof con un enfoque completamente interactivo.
 
 ## 🎯 Características Principales
 
@@ -385,7 +385,7 @@ Para problemas o sugerencias:
 ## 🙏 Créditos
 
 Inspirado en:
-- **Secure Coding Dojo** (OWASP)
+- **HackProof** (OWASP)
 - **PortSwigger Web Security Academy**
 - **HackTheBox**
 - **TryHackMe**

@@ -1,6 +1,6 @@
 """
 API Routes Mejoradas para Ejercicios Interactivos
-Replicando la metodología de Secure Coding Dojo
+Replicando la metodología de HackProof
 """
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session

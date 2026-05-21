@@ -1,4 +1,4 @@
-# 🏗️ Arquitectura - Secure Coding Dojo
+# 🏗️ Arquitectura - HackProof
 
 ## 📐 Diagrama de Arqueología General
 

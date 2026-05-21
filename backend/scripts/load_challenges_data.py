@@ -1,5 +1,5 @@
 """
-Script para cargar los 6 desafíos educativos de Secure Coding Dojo
+Script para cargar los 6 desafíos educativos de HackProof
 """
 import sys
 from pathlib import Path

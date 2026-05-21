@@ -5,7 +5,7 @@ from app.api.routes.challenges_new import router as challenges_router
 from app.core.config import settings
 
 app = FastAPI(
-    title="🛡️ Secure Coding Dojo - Plataforma Educativa Interactiva",
+    title="🛡️ HackProof - Plataforma Educativa Interactiva",
     description="Aprende seguridad en la codificación mediante ejercicios prácticos, desafíos y simulaciones de ataques reales",
     version="2.0.0"
 )
@@ -28,7 +28,7 @@ app.include_router(interactive_exercises.router)
 async def health():
     return {
         "status": "ok",
-        "service": "Secure Coding Dojo",
+        "service": "HackProof",
         "version": "2.0.0",
         "features": [
             "Interactive Exercises",
@@ -42,7 +42,7 @@ async def health():
 @app.get("/")
 async def root():
     return {
-        "message": "Bienvenido a Secure Coding Dojo",
+        "message": "Bienvenido a HackProof",
         "description": "Plataforma educativa para aprender seguridad en la codificación",
         "endpoints": {
             "exercises": "/api/exercises/all",

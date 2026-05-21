@@ -44,7 +44,7 @@ const EnhancedDashboard = ({ onNavigateToExercises }) => {
       {/* Header Principal */}
       <div className="dashboard-header">
         <div className="header-content">
-          <h1>🛡️ Secure Coding Dojo</h1>
+          <h1>🛡️ HackProof</h1>
           <p>Aprende seguridad en la codificación mediante ejercicios prácticos y educación interactiva</p>
         </div>
         <button className="cta-button" onClick={onNavigateToExercises}>
@@ -134,7 +134,7 @@ const EnhancedDashboard = ({ onNavigateToExercises }) => {
 
       {/* Features Section */}
       <div className="features-section">
-        <h2>¿Por qué Secure Coding Dojo?</h2>
+        <h2>¿Por qué HackProof?</h2>
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-icon">🎓</div>
@@ -210,7 +210,7 @@ const EnhancedDashboard = ({ onNavigateToExercises }) => {
 
       {/* Footer */}
       <div className="dashboard-footer">
-        <p>Secure Coding Dojo © 2024 | Plataforma Educativa de Seguridad en Codificación</p>
+        <p>HackProof © 2024 | Plataforma Educativa de Seguridad en Codificación</p>
         <p style={{ fontSize: '0.875rem', opacity: 0.7 }}>
           Diseñado para enseñar seguridad ofensiva y defensiva de forma práctica e interactiva.
         </p>

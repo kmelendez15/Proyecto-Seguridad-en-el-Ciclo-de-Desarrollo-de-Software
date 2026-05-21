@@ -1,5 +1,5 @@
 """
-EJERCICIOS FUNCIONALES DE SECURE CODING DOJO
+EJERCICIOS FUNCIONALES DE HACKPROOF
 Ejercicios con vulnerabilidades reales simuladas y educación progresiva
 """
 

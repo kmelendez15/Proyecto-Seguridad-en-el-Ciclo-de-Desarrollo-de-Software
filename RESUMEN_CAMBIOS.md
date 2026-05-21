@@ -1,8 +1,8 @@
-# 📋 RESUMEN DE TRANSFORMACIÓN - Secure Coding Dojo v2.0
+# 📋 RESUMEN DE TRANSFORMACIÓN - HackProof v2.0
 
 ## 🎯 Objetivo Alcanzado
 
-Transformación completa de un proyecto básico en una **plataforma educativa profesional** que replica fielmente la metodología de **Secure Coding Dojo** con:
+Transformación completa de un proyecto básico en una **plataforma educativa profesional** que replica fielmente la metodología de **HackProof** con:
 
 ✅ 5 ejercicios funcionales completos  
 ✅ Simulador interactivo de ataques  
@@ -320,7 +320,7 @@ Proyecto-Seguridad/
 
 Una **plataforma educativa profesional** que:
 
-- ✅ Replica fielmente Secure Coding Dojo
+- ✅ Replica fielmente HackProof
 - ✅ Es completamente funcional y lista para usar
 - ✅ Tiene interfaz moderna y atractiva
 - ✅ Educación completa y progresiva

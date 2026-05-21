@@ -1,6 +1,6 @@
-# 🛡️ Secure Coding Dojo - Plataforma Educativa Interactiva
+# 🛡️ HackProof - Plataforma Educativa Interactiva
 
-Una **réplica profesional del Secure Coding Dojo** completamente funcional para aprender seguridad en la programación a través de ejercicios prácticos e interactivos.
+Una **réplica profesional del HackProof** completamente funcional para aprender seguridad en la programación a través de ejercicios prácticos e interactivos.
 
 ## ✨ Características Principales
 

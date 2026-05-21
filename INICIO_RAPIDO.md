@@ -1,4 +1,4 @@
-# 🚀 Guía de Inicio Rápido - Secure Coding Dojo
+# 🚀 Guía de Inicio Rápido - HackProof
 
 ## Opción 1: Con Docker Compose (Recomendado - ⭐ MÁS FÁCIL)
 

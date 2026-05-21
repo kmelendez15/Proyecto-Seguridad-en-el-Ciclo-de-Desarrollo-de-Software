@@ -1,4 +1,4 @@
-# ⚡ Guía Rápida de Inicio - Secure Coding Dojo v2.0
+# ⚡ Guía Rápida de Inicio - HackProof v2.0
 
 ## 🚀 Inicio en 5 Minutos
 
@@ -301,7 +301,7 @@ Busca colores:
 Abre: `frontend/src/components/EnhancedDashboard.jsx`
 
 ```jsx
-<h1>🛡️ Secure Coding Dojo</h1>
+<h1>🛡️ HackProof</h1>
 
 // Cambia a:
 <h1>🎓 Mi Academia de Seguridad</h1>

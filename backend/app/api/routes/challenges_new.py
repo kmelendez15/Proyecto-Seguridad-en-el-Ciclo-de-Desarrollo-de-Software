@@ -1,5 +1,5 @@
 """
-API Routes para Secure Coding Dojo - Desafíos Educativos
+API Routes para HackProof - Desafíos Educativos
 Proporciona endpoints para obtener desafíos, gestionar progreso y estadísticas
 """
 from fastapi import APIRouter, Depends, HTTPException, Query

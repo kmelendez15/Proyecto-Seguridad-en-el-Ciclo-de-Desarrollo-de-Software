@@ -1,8 +1,8 @@
-# 🏗️ Arquitectura - Secure Coding Dojo v2.0
+# 🏗️ Arquitectura - HackProof v2.0
 
 ## Visión General
 
-Secure Coding Dojo v2.0 es una plataforma educativa modular basada en una arquitectura de **cliente-servidor** con separación clara de responsabilidades.
+HackProof v2.0 es una plataforma educativa modular basada en una arquitectura de **cliente-servidor** con separación clara de responsabilidades.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐

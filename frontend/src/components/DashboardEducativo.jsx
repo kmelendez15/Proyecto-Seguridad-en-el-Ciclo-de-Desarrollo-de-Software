@@ -45,7 +45,7 @@ const DashboardEducativo = ({ challenges = [], userProgress = {}, onSelectChalle
         </div>
         <div className="hero-content">
           <div className="hero-icon">🛡️</div>
-          <h1>Secure Coding Dojo</h1>
+          <h1>HackProof</h1>
           <p className="hero-subtitle">Aprende seguridad en la programación dominando vulnerabilidades reales</p>
         </div>
       </section>
@@ -193,7 +193,7 @@ const DashboardEducativo = ({ challenges = [], userProgress = {}, onSelectChalle
         <div className="learning-path-card">
           <div className="learning-icon">📚</div>
           <div className="learning-content">
-            <h3>🥋 Tu Camino en Secure Coding Dojo</h3>
+            <h3>🥋 Tu Camino en HackProof</h3>
             <p>
               Comienza con desafíos de principiante para aprender los fundamentos de las vulnerabilidades web más comunes. 
               Progresa a través de niveles intermedios dominando técnicas de ataque y defensa más sofisticadas. 

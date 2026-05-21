@@ -1,4 +1,4 @@
-# 📑 ÍNDICE DE ARCHIVOS - Secure Coding Dojo v2.0
+# 📑 ÍNDICE DE ARCHIVOS - HackProof v2.0
 
 Guía completa de todos los archivos nuevos y modificados en la transformación.
 
