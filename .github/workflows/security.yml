@@ -1,31 +1,53 @@
 name: SSDLC Scan
-
 on: [push]
+
+env:
+  # Corrige la advertencia de Node.js 24 que te aparecía en consola
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
 
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Run Semgrep
-        run: |
-          pip install semgrep
-          semgrep scan --config auto --json --output results.json
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Usamos la acción oficial de Semgrep en Docker. Es más rápida, segura y no requiere instalar pip.
+      - name: Run Semgrep Scan
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: auto
+          generateSarif: "0" # No necesitamos SARIF porque tú exportas a JSON
+        env:
+          SEMGREP_ARGS: --json --output results.json
+
       - name: Send results to ASPM
         env:
           API_URL: ${{ secrets.ASPM_API_URL }}
           API_KEY: ${{ secrets.ASPM_API_KEY }}
         run: |
+          # Verificación de seguridad: si Semgrep falló o no generó el JSON, no continuamos
+          if [ ! -f results.json ]; then
+            echo "Error: results.json no fue generado por Semgrep."
+            exit 1
+          fi
+
+          # Reintento de envío al ASPM
           for i in 1 2 3; do
+            echo "Intento $i de enviar resultados al ASPM..."
             status=$(curl -X POST "$API_URL/api/ingest/" \
               -H "Authorization: Bearer $API_KEY" \
               -H "Content-Type: application/json" \
               -d @results.json \
               -o /dev/null -w '%{http_code}' -s)
+            
             if [ "$status" -eq 202 ] || [ "$status" -eq 200 ]; then
-              echo "Successfully ingested"
+              echo "¡Éxito! Datos ingeridos correctamente por el ASPM."
               exit 0
             fi
+            echo "Error del servidor (HTTP $status). Reintentando en 5 segundos..."
             sleep 5
           done
+          
+          echo "Error: No se pudieron enviar los resultados tras 3 intentos."
           exit 1
