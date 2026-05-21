@@ -1,8 +1,6 @@
 name: SSDLC Scan
 on: [push]
-
-env:
-  # Corrige la advertencia de Node.js 24 que te aparecía en consola
+env:  # Corrige la advertencia de Node.js 24 que te aparecía en consola  
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
 
 jobs:
@@ -19,7 +17,8 @@ jobs:
           config: auto
           generateSarif: "0" # No necesitamos SARIF porque tú exportas a JSON
         env:
-          SEMGREP_ARGS: --json --output results.json
+          # Agregamos --exclude="backend/venv" para saltar las dependencias de terceros
+          SEMGREP_ARGS: --json --output results.json --exclude="backend/venv"
 
       - name: Send results to ASPM
         env:
@@ -31,7 +30,6 @@ jobs:
             echo "Error: results.json no fue generado por Semgrep."
             exit 1
           fi
-
           # Reintento de envío al ASPM
           for i in 1 2 3; do
             echo "Intento $i de enviar resultados al ASPM..."
@@ -40,7 +38,7 @@ jobs:
               -H "Content-Type: application/json" \
               -d @results.json \
               -o /dev/null -w '%{http_code}' -s)
-            
+                        
             if [ "$status" -eq 202 ] || [ "$status" -eq 200 ]; then
               echo "¡Éxito! Datos ingeridos correctamente por el ASPM."
               exit 0
@@ -48,6 +46,6 @@ jobs:
             echo "Error del servidor (HTTP $status). Reintentando en 5 segundos..."
             sleep 5
           done
-          
+                    
           echo "Error: No se pudieron enviar los resultados tras 3 intentos."
           exit 1
