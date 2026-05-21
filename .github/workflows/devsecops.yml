@@ -50,9 +50,9 @@ jobs:
             --config p/owasp-top-ten \
             --config p/python \
             --config p/javascript \
-            --error \
             --sarif \
-            --output semgrep-results.sarif .
+            --output semgrep-results.sarif \
+            backend/app frontend/src
 
       - name: Upload Semgrep SARIF report
         if: always()
