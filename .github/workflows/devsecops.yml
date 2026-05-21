@@ -191,7 +191,7 @@ jobs:
 
       - name: Check frontend is running
         run: |
-          curl -f http://localhost:5173
+          curl -f http://localhost:3000
 
       - name: Run OWASP ZAP baseline scan
         run: |
@@ -199,7 +199,7 @@ jobs:
             -v ${{ github.workspace }}:/zap/wrk/:rw \
             ghcr.io/zaproxy/zaproxy:stable \
             zap-baseline.py \
-            -t http://localhost:5173 \
+            -t http://localhost:3000 \
             -r zap-report.html \
             -I
 
