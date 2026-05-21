@@ -77,7 +77,7 @@ const InteractiveExercise = ({ challenge, onComplete, onBack }) => {
     const outputs = {
       'SQL_INJECTION': 'SELECT * FROM users WHERE email = ?;\n-- Parámetro: "" OR "1"="1"\n-- Error: Email inválido\n-- Inyección bloqueada ✓',
       'XSS': 'innerHTML sanitizado: &lt;script&gt;alert(\'XSS\')&lt;/script&gt;\n-- HTML escapado correctamente\n-- Ataque mitigado ✓',
-      'CSRF': 'Error: CSRF token inválido\nToken esperado: 7a8b9c0d1e2f3g4h\nToken recibido: ninguno\n-- Solicitud rechazada ✓',
+      'CSRF': 'Error: validación CSRF fallida\nEl valor de verificación no coincide con la sesión activa\n-- Solicitud rechazada ✓',
       'BROKEN_AUTH': 'Error: Credenciales inválidas\nIntentos fallidos: 3/5\n-- Autenticación requerida ✓',
       'IDOR': 'Error 403: No tienes permiso para acceder a este recurso\nUsuario actual: user_123\nRecurso propietario: user_456\n-- Autorización requerida ✓',
       'INSECURE_DESERIALIZE': 'Error: Tipo de objeto no permitido\n-- Desserialización segura rechazó el payload\n-- Ataque bloqueado ✓'
