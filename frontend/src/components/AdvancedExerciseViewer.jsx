@@ -3,6 +3,98 @@ import { ChevronRight, Shield, AlertTriangle, CheckCircle, Book, Code, Target, Z
 import API_URL from '../config';
 import './AdvancedExerciseViewer.css';
 
+const codeFallbacks = {
+  '1_sql_injection_login': {
+    vulnerable_code: `# CÓDIGO VULNERABLE
+username = request.form.get('username')
+password = request.form.get('password')
+query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
+cursor.execute(query)
+`,
+    vulnerable_code_explanation: `Concatena la entrada del usuario directamente en la consulta SQL. Un atacante puede inyectar comillas o operadores lógicos para alterar la consulta.`,
+    secure_code: `# CÓDIGO SEGURO
+username = request.form.get('username', '').strip()
+password = request.form.get('password', '')
+query = "SELECT * FROM users WHERE username = ? AND password = ?"
+cursor.execute(query, (username, password))
+`,
+    secure_code_explanation: `Usa prepared statements para separar la consulta de los datos. La entrada del usuario ya no puede cambiar la sintaxis SQL ni ejecutar comandos adicionales.`,
+  },
+  '2_xss_comment_section': {
+    vulnerable_code: `# CÓDIGO VULNERABLE
+comment = request.form.get('comment')
+html = f"<p>{comment}</p>"
+return html
+`,
+    vulnerable_code_explanation: `Renderiza texto del usuario sin escapar. Si el comentario incluye etiquetas o scripts, el navegador los ejecutará como HTML/JS.`,
+    secure_code: `# CÓDIGO SEGURO
+comment = request.form.get('comment', '').strip()
+comment_safe = escape(comment)
+html = f"<p>{comment_safe}</p>"
+return html
+`,
+    secure_code_explanation: `Escapa el contenido del usuario antes de insertarlo en HTML. Esto evita que etiquetas y scripts se interpreten en el navegador.`,
+  },
+  '3_broken_authentication_weak_session': {
+    vulnerable_code: `# CÓDIGO VULNERABLE
+password = request.form.get('password')
+if username == 'admin' and password == '12345':
+    session['user'] = 'admin'
+    return 'Logged in'
+return 'Login failed'
+`,
+    vulnerable_code_explanation: `Usa una contraseña fija y débil en la lógica de autenticación. Además, no protege la sesión contra reutilización o robo.`,
+    secure_code: `# CÓDIGO SEGURO
+password = request.form.get('password', '')
+stored_hash = get_password_hash(username)
+if stored_hash and check_password_hash(stored_hash, password):
+    session['user'] = username
+    return 'Logged in'
+return 'Login failed'
+`,
+    secure_code_explanation: `Verifica la contraseña comparando hashes seguros. No almacena contraseñas en texto claro y usa la sesión solo después de validación.`,
+  },
+  '4_insecure_deserialization': {
+    vulnerable_code: `# CÓDIGO VULNERABLE
+data = request.data
+obj = pickle.loads(data)
+result = obj.process()
+return result
+`,
+    vulnerable_code_explanation: `Usar pickle.loads en datos de usuario permite ejecutar código malicioso. La deserialización no es segura si el contenido no es confiable.`,
+    secure_code: `# CÓDIGO SEGURO
+data = request.data
+payload = json.loads(data)
+if payload.get('action') == 'process':
+    result = safe_process(payload['value'])
+    return result
+return 'Invalid request'
+`,
+    secure_code_explanation: `Usa JSON seguro en lugar de pickle y verifica el formato esperado. Esto evita la ejecución de objetos no confiables.`,
+  },
+  '5_weak_encryption': {
+    vulnerable_code: `# CÓDIGO VULNERABLE
+password = request.form.get('password')
+hash = hashlib.md5(password.encode()).hexdigest()
+if hash == stored_hash:
+    return 'Authenticated'
+return 'Invalid'
+`,
+    vulnerable_code_explanation: `MD5 es una función hash débil y rápida. No protege bien las contraseñas y permite ataques de fuerza bruta y colisiones.`,
+    secure_code: `# CÓDIGO SEGURO
+password = request.form.get('password', '')
+if bcrypt.checkpw(password.encode(), stored_hash):
+    return 'Authenticated'
+return 'Invalid'
+`,
+    secure_code_explanation: `Usa un algoritmo de hash resistente como bcrypt. Esto hace que los intentos de adivinar contraseñas sean mucho más lentos y seguros.`,
+  },
+};
+
+const getExerciseCodeFallback = (exercise) => {
+  return codeFallbacks[exercise.id] || {};
+};
+
 const AdvancedExerciseViewer = ({ exerciseId, onBack }) => {
   const [exercise, setExercise] = useState(null);
   const [activeTab, setActiveTab] = useState('explanation');
@@ -14,6 +106,12 @@ const AdvancedExerciseViewer = ({ exerciseId, onBack }) => {
   const [loading, setLoading] = useState(true);
   const [timeSpent, setTimeSpent] = useState(0);
   const [attempts, setAttempts] = useState(0);
+
+  const fallbackCode = exercise ? getExerciseCodeFallback(exercise) : {};
+  const vulnerableCode = exercise?.vulnerable_code || fallbackCode.vulnerable_code || '';
+  const vulnerableCodeExplanation = exercise?.vulnerable_code_explanation || fallbackCode.vulnerable_code_explanation || '';
+  const secureCode = exercise?.secure_code || fallbackCode.secure_code || '';
+  const secureCodeExplanation = exercise?.secure_code_explanation || fallbackCode.secure_code_explanation || '';
 
   // Cargar ejercicio
   useEffect(() => {
@@ -257,11 +355,11 @@ const AdvancedExerciseViewer = ({ exerciseId, onBack }) => {
                       {/* Vulnerable code explanation */}
                     </div>
                     <pre className="code-block">
-                      <code>{exercise.vulnerable_code}</code>
+                      <code>{vulnerableCode}</code>
                     </pre>
                     <div className="code-insights">
                       <p><strong>Problemas:</strong></p>
-                      <p>{exercise.vulnerable_code_explanation}</p>
+                      <p>{vulnerableCodeExplanation}</p>
                     </div>
                   </div>
                 )}
@@ -269,11 +367,11 @@ const AdvancedExerciseViewer = ({ exerciseId, onBack }) => {
                 {codeTab === 'secure' && (
                   <div className="code-section secure">
                     <pre className="code-block">
-                      <code>{exercise.secure_code}</code>
+                      <code>{secureCode}</code>
                     </pre>
                     <div className="code-insights">
                       <p><strong>Mejoras de Seguridad:</strong></p>
-                      <p>{exercise.secure_code_explanation}</p>
+                      <p>{secureCodeExplanation}</p>
                     </div>
                   </div>
                 )}
